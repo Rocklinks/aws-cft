@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  EC2 Instances
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0522ab6e1ddcc7055
+      InstanceType: t2.micro
+      KeyName: ubuntu
+      Tags:
+        - Key: Name
+          Value: Ec2

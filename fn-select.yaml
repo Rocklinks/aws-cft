@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Create EC2 instance | Select"
+
+Parameters: 
+  Environment:
+    Type: String
+    AllowedValues:
+      - dev #Never choose dev it will charge you, its not in free tier
+      - qa
+
+Conditions: 
+  CreateResources: !Equals [ !Ref Environment, qa ]
+
+Resources: 
+  Instance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: !If [CreateResources, !Select [ 0, [t2.micro, m1.large] ], !Select [ 1, [t2.micro, m1.large] ]]
+      ImageId: ami-0892a9c01908fafd1
+      

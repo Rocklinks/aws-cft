@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "CIDR"
+
+Resources:
+    Vpc:
+        Type: AWS::EC2::VPC
+        Properties:
+            CidrBlock: 10.0.0.0/16
+
+    ExampleSubnet:
+        Type: AWS::EC2::Subnet
+        Properties:
+            CidrBlock: !Select [ 0, !Cidr [ !GetAtt Vpc.CidrBlock, 1, 8 ]]
+            VpcId: !Ref Vpc
+
+Outputs:
+    OutSubnet:
+        Value: !Select [ 0, !Cidr [ !GetAtt Vpc.CidrBlock, 1, 8 ]]

@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "ChangeSet"
+
+Parameters:
+    S3BucketName:
+        Description: Enter S3 bucket name
+        Type: String
+
+    InstanceTypeParameter: 
+      Description: Select instance type
+      Type: String
+      Default: t2.micro
+
+Resources:
+    S3Bucket:
+        Type: AWS::S3::Bucket
+        Properties:
+            BucketName: !Ref S3BucketName
+
+    Instance:  
+      Type: AWS::EC2::Instance #type 
+      Properties: 
+        InstanceType: !Ref InstanceTypeParameter
+        ImageId: ami-0dba2cb6798deb6d8
+Outputs:
+    BucketName:
+        Value: !Ref 'S3Bucket'
